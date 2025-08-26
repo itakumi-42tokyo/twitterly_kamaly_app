@@ -1,9 +1,14 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+
+# 既存のデータを全て削除してから追加する場合
+Theme.destroy_all
+
+Theme.create!([
+  { title: '最近、一番笑ったことは？' },
+  { title: 'おすすめの休日の過ごし方' },
+  { title: '好きな映画を３つ教えて！' },
+  { title: '10年後の自分に一言' },
+  { title: 'もし魔法が一つだけ使えたら？' }
+])
+
+puts "テーマの初期データ投入が完了しました！"
