@@ -1,0 +1,26 @@
+<h1>Let’s post with today’s topic!</h1>
+
+<%# turbo_frame_tagはここで使っても良いですが、今回はシンプルに全体を描画します %>
+<div class="theme-box">
+  <h2>お題：<%= @theme.title %></h2>
+  <%# ボタンのリンク先をroot_pathに変更。これによりランダムなテーマに飛ぶようになります %>
+  <%= link_to "別のテーマを探す", root_path, class: "btn-change-theme" %>
+</div>
+
+<hr>
+
+<%# ここに投稿フォームを置くことができます %>
+
+<div class="posts-list">
+  <h3>everyone posts</h3>
+  <% if @posts.any? %>
+    <% @posts.each do |post| %>
+      <div class="post-item">
+        <p><%= post.content %></p>
+        <small><%= time_ago_in_words(post.created_at) %>ago</small>
+      </div>
+    <% end %>
+  <% else %>
+    <p>There are no posts for this topic yet.</p>
+  <% end %>
+</div>

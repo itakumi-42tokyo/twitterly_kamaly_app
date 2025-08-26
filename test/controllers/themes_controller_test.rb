@@ -8,8 +8,8 @@ class ThemesSetup < ActionDispatch::IntegrationTest
 end
 
 class ThemesControllerTest < ThemesSetup
-	test "should get index" do
+	test "should get random" do
     get root_path
-    assert_response :success
+    assert_response :found
   end
 end
