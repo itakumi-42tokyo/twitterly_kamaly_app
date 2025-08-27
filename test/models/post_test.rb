@@ -1,7 +1,14 @@
 require "test_helper"
 
-class PostTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class PostSetup < ActiveSupport::TestCase
+
+	def setup
+		@post = posts(:hello)
+	end
+end
+
+class PostTest < PostSetup
+	test "validate post content presence" do
+		assert @post.valid?
+	end
 end

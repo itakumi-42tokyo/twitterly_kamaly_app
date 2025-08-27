@@ -6,7 +6,7 @@ class ThemesController < ApplicationController
 			redirect_to theme_posts_url(theme_id: random_id)
 		else
 			flash[:alert] = "There is no theme to display"
-			redirect_to root_path
+			render 'no_themes'
 		end
 	end
 end

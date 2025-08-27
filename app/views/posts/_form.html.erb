@@ -1,0 +1,8 @@
+<%= simple_form_for [@theme, @post], url: theme_posts_path(@theme) do |f| %>	
+
+	<%= f.input :content, label: '投稿内容' %>
+
+  <%= f.hidden_field :theme_id, value: @theme.id %>
+  <%= f.button :submit, '投稿する', class: "btn btn-primary" %>
+<% end %>
+

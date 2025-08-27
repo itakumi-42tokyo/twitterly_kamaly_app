@@ -1,26 +1,34 @@
-<h1>Let’s post with today’s topic!</h1>
-
-<%# turbo_frame_tagはここで使っても良いですが、今回はシンプルに全体を描画します %>
-<div class="theme-box">
-  <h2>お題：<%= @theme.title %></h2>
-  <%# ボタンのリンク先をroot_pathに変更。これによりランダムなテーマに飛ぶようになります %>
-  <%= link_to "別のテーマを探す", root_path, class: "btn-change-theme" %>
+<%# 1. お題表示エリア %>
+    <%# ↓ この div タグを追加・修正します ↓ %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1><%= @theme.title %></h1>
+      <%# 「別のお題に変える」ボタン %>
+  <%= link_to 'テーマを変える', root_path, class: 'btn btn-outline-secondary' %>
+      <%# ボタンのスタイルも、画像に合わせてoutline-secondaryにしてみました %>
 </div>
 
-<hr>
+    <%# 必要であれば、ここにサブテキストなどを追加できます %>
+    <%# <p class="card-text">このお題で投稿してみよう！</p> %>
 
-<%# ここに投稿フォームを置くことができます %>
+<%# 2. 投稿フォーム %>
+<%= provide(:button_text, '投稿する') %>
+<div class="mb-4">
+  <%= render 'form', post: @post, theme: @theme %>
+</div>
 
-<div class="posts-list">
-  <h3>everyone posts</h3>
-  <% if @posts.any? %>
-    <% @posts.each do |post| %>
-      <div class="post-item">
-        <p><%= post.content %></p>
-        <small><%= time_ago_in_words(post.created_at) %>ago</small>
+
+<%# 3. 投稿一覧 %>
+<h3 class="mb-3">みんなの投稿</h3>
+<div id="posts">
+  <% @posts.each do |post| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text"><%= post.content %></p>
       </div>
-    <% end %>
-  <% else %>
-    <p>There are no posts for this topic yet.</p>
+      <div class="card-footer text-muted">
+        投稿日時: <%= l post.created_at, format: :short %>
+      </div>
+    </div>
   <% end %>
 </div>
+
